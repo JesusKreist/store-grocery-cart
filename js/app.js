@@ -164,3 +164,40 @@ for (let i = 0; i < pics.length; i++) {
         pics[i].addEventListener("click", myModal);
     };
 })();
+
+
+let defaultCart = "off";
+const cart = document.getElementById("cart")
+
+const cartBtn = document.getElementById("cart-info");
+cartBtn.onclick = () => {
+    console.log("Cart is clicked!")
+    if (defaultCart == "off") {
+        cart.classList.add("show-cart");
+        defaultCart = "on";
+    } else {
+        cart.classList.remove("show-cart");
+        defaultCart = "off";
+    };    
+};
+
+let cartItem = `<div class="cart-item d-flex justify-content-between text-capitalize my-3">
+            <img src="img-cart/${1+1}.jpeg" class="img-fluid rounded-circle" id="item-img" alt="">
+            <div class="cart-item-text">
+          
+              <p id="cart-item-title" class="font-weight-bold mb-0">cart item</p>
+              <span>$</span>
+              <span id="cart-item-price" class="cart-item-price" class="mb-0">10.99</span>
+            </div>
+            <a href="#" id='cart-item-remove' class="cart-item-remove">
+              <i class="fas fa-trash"></i>
+            </a>
+          </div>`
+
+const storeItems = document.getElementsByClassName("store-item-icon");
+for (let elem of storeItems) {
+    // console.log(elem);
+    let itemSrc = elem.offsetParent.firstElementChild.src;
+    let itemPrice;
+    console.log(itemSrc);
+}
