@@ -197,6 +197,9 @@ body {
 }
 
 /* ligthbox */
+.hide-cart {
+  display: none;
+}
 
 .lightbox-container {
   position: fixed;

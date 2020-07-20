@@ -166,14 +166,19 @@ for (let i = 0; i < pics.length; i++) {
 })();
 
 
-let cartTotal = 0
+let cartTotal = 21.98;
+let cartTotalDisplay = document.querySelector(".item-total");
+let hiddenTotal = document.getElementById("cart-total");
+hiddenTotal.innerText = cartTotal.toFixed(2);
+cartTotalDisplay.innerText = cartTotal.toFixed(2);
+
 
 let defaultCart = "off";
 const cart = document.getElementById("cart");
+const totalContainer = document.querySelector(".cart-total-container")
 
 const cartBtn = document.getElementById("cart-info");
 cartBtn.onclick = () => {
-    console.log("Cart is clicked!")
     if (defaultCart == "off") {
         cart.classList.add("show-cart");
         defaultCart = "on";
@@ -189,37 +194,36 @@ cartBtn.onclick = () => {
 const storeItems = document.getElementsByClassName("store-item-icon");
 for (let elem of storeItems) {
     // console.log(elem);
-    let cartItem = `<div class="cart-item d-flex justify-content-between text-capitalize my-3">
-            <img src="img-cart/${1 + 1}.jpeg" class="img-fluid rounded-circle" id="item-img" alt="">
-            <div class="cart-item-text">
-          
-              <p id="cart-item-title" class="font-weight-bold mb-0">cart item</p>
-              <span>$</span>
-              <span id="cart-item-price" class="cart-item-price" class="mb-0">10.99</span>
-            </div>
-            <a href="#" id='cart-item-remove' class="cart-item-remove">
-              <i class="fas fa-trash"></i>
-            </a>
-          </div>`
     let itemSrc = elem.previousElementSibling.src;
+    let srcArray = itemSrc.split(".");
+    let lastSourceImg = srcArray[srcArray.length - 2];
+    let actualImage = lastSourceImg.split("/");
+    let realActualImage = actualImage[actualImage.length -1];
+    // console.log(realActualImage);
     let flowDoc = elem.parentNode.parentNode;
     let flowDocCont = flowDoc.lastElementChild.children[0].children;
     let itemName = flowDocCont[0].innerText;
     let itemPrice = flowDocCont[1].innerText;
     let itempriceNumber = Number(itemPrice.replace("$ ", ""));
-    let addCartBtn = elem.firstElementChild;
+    let cartItem = `<div class="cart-item d-flex justify-content-between text-capitalize my-3">
+            <img src="img-cart/${realActualImage}.jpeg" class="img-fluid rounded-circle" id="item-img" alt="">
+            <div class="cart-item-text">
+          
+              <p id="cart-item-title" class="font-weight-bold mb-0">${itemName}</p>
+              <span>$</span>
+              <span id="cart-item-price" class="cart-item-price" class="mb-0">${itempriceNumber}</span>
+            </div>
+            <a href="#" id='cart-item-remove' class="cart-item-remove">
+              <i class="fas fa-trash"></i>
+            </a>
+          </div>`
+
     const addToCart = () => {
-        console.log("hehe");
+        totalContainer.insertAdjacentHTML("beforebegin", cartItem);
+        cartTotal += itempriceNumber;
+        hiddenTotal.innerText = cartTotal.toFixed(2);
+        cartTotalDisplay.innerText = cartTotal.toFixed(2);
+
     };
-    elem.onclick = () => {
-        console.log(`The item is ${itemName}`);
-        console.log(`The price is ${itemPrice}`);
-        console.log(`The image source is ${itemSrc}`);
-    };
-    
-    // let itemPrice;
-    // console.log(itemSrc);
+    elem.onclick = addToCart;
 };
-
-
-// cart.insertAdjacentElement("beforebegin", <h1>It's on</h1>)
