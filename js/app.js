@@ -176,24 +176,13 @@ for (let i = 0; i < pics.length; i++) {
     hiddenTotal.innerText = cartTotal.toFixed(2);
     cartTotalDisplay.innerText = cartTotal.toFixed(2);
 
-
-    let defaultCart = "off";
     const cart = document.getElementById("cart");
     const totalContainer = document.querySelector(".cart-total-container")
 
     const cartBtn = document.getElementById("cart-info");
     cartBtn.onclick = () => {
-        if (defaultCart == "off") {
-            cart.classList.add("show-cart");
-            defaultCart = "on";
-        } else {
-            cart.classList.remove("show-cart");
-            defaultCart = "off";
-        };
+        cart.classList.toggle("show-cart");
     };
-
-    // let cartTotal = 0;
-
 
     const storeItems = document.getElementsByClassName("store-item-icon");
     for (let elem of storeItems) {
@@ -227,6 +216,7 @@ for (let i = 0; i < pics.length; i++) {
             cartTotal += itempriceNumber;
             hiddenTotal.innerText = cartTotal.toFixed(2);
             cartTotalDisplay.innerText = cartTotal.toFixed(2);
+            alert("Item add to cart");
 
         };
         elem.onclick = addToCart;
