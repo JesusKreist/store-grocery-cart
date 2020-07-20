@@ -166,8 +166,10 @@ for (let i = 0; i < pics.length; i++) {
 })();
 
 
+let cartTotal = 0
+
 let defaultCart = "off";
-const cart = document.getElementById("cart")
+const cart = document.getElementById("cart");
 
 const cartBtn = document.getElementById("cart-info");
 cartBtn.onclick = () => {
@@ -181,8 +183,14 @@ cartBtn.onclick = () => {
     };    
 };
 
-let cartItem = `<div class="cart-item d-flex justify-content-between text-capitalize my-3">
-            <img src="img-cart/${1+1}.jpeg" class="img-fluid rounded-circle" id="item-img" alt="">
+// let cartTotal = 0;
+
+          
+const storeItems = document.getElementsByClassName("store-item-icon");
+for (let elem of storeItems) {
+    // console.log(elem);
+    let cartItem = `<div class="cart-item d-flex justify-content-between text-capitalize my-3">
+            <img src="img-cart/${1 + 1}.jpeg" class="img-fluid rounded-circle" id="item-img" alt="">
             <div class="cart-item-text">
           
               <p id="cart-item-title" class="font-weight-bold mb-0">cart item</p>
@@ -193,11 +201,25 @@ let cartItem = `<div class="cart-item d-flex justify-content-between text-capita
               <i class="fas fa-trash"></i>
             </a>
           </div>`
+    let itemSrc = elem.previousElementSibling.src;
+    let flowDoc = elem.parentNode.parentNode;
+    let flowDocCont = flowDoc.lastElementChild.children[0].children;
+    let itemName = flowDocCont[0].innerText;
+    let itemPrice = flowDocCont[1].innerText;
+    let itempriceNumber = Number(itemPrice.replace("$ ", ""));
+    let addCartBtn = elem.firstElementChild;
+    const addToCart = () => {
+        console.log("hehe");
+    };
+    elem.onclick = () => {
+        console.log(`The item is ${itemName}`);
+        console.log(`The price is ${itemPrice}`);
+        console.log(`The image source is ${itemSrc}`);
+    };
+    
+    // let itemPrice;
+    // console.log(itemSrc);
+};
 
-const storeItems = document.getElementsByClassName("store-item-icon");
-for (let elem of storeItems) {
-    // console.log(elem);
-    let itemSrc = elem.offsetParent.firstElementChild.src;
-    let itemPrice;
-    console.log(itemSrc);
-}
+
+// cart.insertAdjacentElement("beforebegin", <h1>It's on</h1>)
